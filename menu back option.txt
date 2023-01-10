@@ -1,0 +1,97 @@
+#include<iostream>
+#include<string>
+#include<stack>
+#include<list>
+#include<iterator>
+using namespace std;
+
+class Stack{
+	public:
+		stack <string> menuList;
+		string header;
+		int header_num;
+	void createMenu(int header_num)
+	{
+		this->header_num = header_num;
+		header = "Menu" + to_string(header_num);
+	}
+
+	void push_stack()
+	{
+		menuList.push(header);
+	}
+	void pop_stack()
+	{
+		menuList.pop();
+	}
+	void dispay()
+	{
+		cout << menuList.top() << endl;
+	}
+	
+	
+};
+
+int main_menu()
+{
+	cout << "1. Next Menu" << endl;
+	cout << "-1. Exit" << endl;
+	int opt;
+	cout << "Your option : ";
+	cin >> opt;
+	return opt;
+}
+
+int first_menu()
+{
+	cout << "0. Back" << endl;
+	cout << "1. Next" << endl;
+	int opt;
+	cout << "Your option : ";
+	cin >> opt;
+	return opt;
+}
+
+main()
+{
+	Stack s;
+	s.createMenu(1);
+	s.push_stack();
+	s.dispay();
+	int m_m = main_menu();
+	int m_first;
+	while(m_m != -1 && s.header_num == 1)
+	{
+		if(m_m == 1)
+		{
+			s.createMenu(2);
+			s.push_stack();
+			s.dispay();
+			m_first = first_menu();
+			if(m_first == 1)
+			{
+				s.createMenu(3);
+				s.push_stack();
+				s.dispay();
+				first_menu();
+			}
+			else if(m_first == 0)
+			{
+				s.pop_stack();
+				s.dispay();
+				m_m = main_menu();
+			}
+		}
+		else 
+		{
+			s.pop_stack();
+			first_menu();
+		}
+	}
+	
+	
+	
+
+	
+	
+}
